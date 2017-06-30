@@ -22,7 +22,12 @@ public class Dispatch{
 	 */
 	public static void main(String[] args) {
 		Dispatch d = new Dispatch();
-		d.dispatchCall(10, 24);
+		try {
+			d.dispatchCall(10, 24);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -31,7 +36,7 @@ public class Dispatch{
 	 * @param numeroEmpleados
 	 * @param numeroLlamadas
 	 */
-	public void dispatchCall(int numeroEmpleados, int numeroLlamadas){
+	public void dispatchCall(int numeroEmpleados, int numeroLlamadas) throws InterruptedException{
 		arr = new ArrayList<Thread>();
 		llamadasCola = new ConcurrentLinkedQueue<Llamada>();
 		//Genera la lista de hilos que representan cantidad de empleados (10)
@@ -39,7 +44,7 @@ public class Dispatch{
 			Thread t = new Thread(new Empleado(llamadasCola)); 
 			arr.add(t);
 		}
-		//Añade el total de llamadas definidas a la lista de llamadas 24 en el metodo main
+		//AÃ±ade el total de llamadas definidas a la lista de llamadas 24 en el metodo main
 		for (int i = 0; i < numeroLlamadas; i++) {
 			llamadasCola.add(new Llamada(i));
 		}
@@ -53,7 +58,7 @@ public class Dispatch{
 				arr.get(i).join();
 				System.out.println("El empleado "+(i+1)+" finalizo");
 			} catch (InterruptedException e) {
-				e.printStackTrace();
+				throw new InterruptedException();
 			}
 		}
 	}
