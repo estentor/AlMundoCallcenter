@@ -17,7 +17,7 @@ class TestDispatch extends AppTest{
 	public static void assertDoesNotThrow(InterruptedException ex){
 	    try{
 	      Dispatch d = new Dispatch();
-	      d.dispatchCall(10, 30);
+	      d.dispatchCall(10, 10);
 	    }
 	    catch(Exception e){
 	      fail("No deberia lanzar exception!");
